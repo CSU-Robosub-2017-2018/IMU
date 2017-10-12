@@ -1,9 +1,9 @@
 
 clear
 
-com = 'COM4';
+com = 'COM3';
 BauRate = 115200;
-ser = serial('COM4', 'BaudRate', 115200, 'FlowControl', 'software');
+ser = serial('COM3', 'BaudRate', 115200, 'FlowControl', 'software');
 fopen(ser);
 i =1;
 discard = fscanf(ser);
@@ -20,7 +20,7 @@ outVel = [0,0,0];
 
 
 while i <=4000
-    inter = fscanf(ser);
+    inter = fscanf(ser)
     inter = strrep(inter,':',',');
     c = strsplit(inter, ',');
     val = [val; c];
