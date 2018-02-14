@@ -34,7 +34,3 @@ if __name__ == '__main__':
             XMagno = rawImuData[6]
             YMagno = rawImuData[7]
             ZMagno = rawImuData[8]
-
-            print("x: " + str(XAaccel))
-            print("y: " + str(YAaccel))
-            print("x: " + str(ZAaccel))

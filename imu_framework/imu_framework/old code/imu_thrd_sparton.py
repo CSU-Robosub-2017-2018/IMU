@@ -4,7 +4,7 @@ import time
 import serial
 
 
-class imu_this_is_starta(imu):
+class imu_thrd_sparton(imu):
 
 
     def __init__(self, porty='COM3', timeout=2):

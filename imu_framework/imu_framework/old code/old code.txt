@@ -1,0 +1,124 @@
+     # def getAccBank(self):
+    #     output = self.memData.getAccBank()
+    #     return output
+    #
+    # def getVelBank(self):
+    #     output = self.memData.getVelBank()
+    #     return output
+    #
+    # def getPosBank(self):
+    #     output = self.memData.getPosBank()
+    #     return output
+
+
+    def fifo_ACC_MemoryUpdate(self, inputData):
+        i = 0
+        if self.fifoMemIteration < self.fifoMemSize:
+            self.fifo_ACC_Memory[self.fifoMemIteration, 0] = inputData[0]
+            self.fifo_ACC_Memory[self.fifoMemIteration, 1] = inputData[1]
+            self.fifo_ACC_Memory[self.fifoMemIteration, 2] = inputData[2]
+
+            print(self.fifo_ACC_Memory)
+
+        if self.fifoMemIteration >= self.fifoMemSize:
+            while i <= (self.fifoMemSize - 2):
+                self.fifo_ACC_Memory[i, 0] = self.fifo_ACC_Memory[i + 1, 0]
+                self.fifo_ACC_Memory[i, 1] = self.fifo_ACC_Memory[i + 1, 1]
+                self.fifo_ACC_Memory[i, 2] = self.fifo_ACC_Memory[i + 1, 2]
+                i += 1
+
+            self.fifo_ACC_Memory[self.fifoMemSize - 1, 0] = inputData[0]
+            self.fifo_ACC_Memory[self.fifoMemSize - 1, 1] = inputData[1]
+            self.fifo_ACC_Memory[self.fifoMemSize - 1, 2] = inputData[2]
+            print(self.fifo_ACC_Memory)
+
+        self.fifoMemIteration += 1
+
+
+
+    def fifo_VEL_MemoryUpdate(self, inputData):
+        i = 0
+        if self.fifoMemIteration < self.fifoMemSize:
+            self.fifo_VEL_Memory[self.fifoMemIteration, 0] = inputData[0]
+            self.fifo_VEL_Memory[self.fifoMemIteration, 1] = inputData[1]
+            self.fifo_VEL_Memory[self.fifoMemIteration, 2] = inputData[2]
+
+            print(self.fifo_ACC_Memory)
+
+        if self.fifoMemIteration >= self.fifoMemSize:
+            while i <= (self.fifoMemSize - 2):
+                self.fifo_VEL_Memory[i, 0] = self.fifo_VEL_Memory[i + 1, 0]
+                self.fifo_VEL_Memory[i, 1] = self.fifo_VEL_Memory[i + 1, 1]
+                self.fifo_VEL_Memory[i, 2] = self.fifo_VEL_Memory[i + 1, 2]
+                i += 1
+
+            self.fifo_VEL_Memory[self.fifoMemSize - 1, 0] = inputData[0]
+            self.fifo_VEL_Memory[self.fifoMemSize - 1, 1] = inputData[1]
+            self.fifo_VEL_Memory[self.fifoMemSize - 1, 2] = inputData[2]
+            print(self.fifo_VEL_Memory)
+
+        self.fifoMemIteration += 1
+
+
+
+    def fifo_POS_MemoryUpdate(self, inputData):
+        i = 0
+        if self.fifoMemIteration < self.fifoMemSize:
+            self.fifo_POS_Memory[self.fifoMemIteration, 0] = inputData[0]
+            self.fifo_POS_Memory[self.fifoMemIteration, 1] = inputData[1]
+            self.fifo_POS_Memory[self.fifoMemIteration, 2] = inputData[2]
+
+            print(self.fifo_ACC_Memory)
+
+        if self.fifoMemIteration >= self.fifoMemSize:
+            while i <= (self.fifoMemSize - 2):
+                self.fifo_POS_Memory[i, 0] = self.fifo_POS_Memory[i + 1, 0]
+                self.fifo_POS_Memory[i, 1] = self.fifo_POS_Memory[i + 1, 1]
+                self.fifo_POS_Memory[i, 2] = self.fifo_POS_Memory[i + 1, 2]
+                i += 1
+
+            self.fifo_POS_Memory[self.fifoMemSize - 1, 0] = inputData[0]
+            self.fifo_POS_Memory[self.fifoMemSize - 1, 1] = inputData[1]
+            self.fifo_POS_Memory[self.fifoMemSize - 1, 2] = inputData[2]
+            print(self.fifo_POS_Memory)
+
+        self.fifoMemIteration += 1
+
+
+    def getfifoAccData(self):
+        ouptut = self.fifo_ACC_Memory
+        return ouptut
+
+    def getfifoVelData(self):
+        ouptut = self.fifo_ACC_Memory
+        return ouptut
+
+    def getfifoPosData(self):
+        ouptut = self.fifo_ACC_Memory
+        return ouptut
+
+
+    def setAccBank(self, data):
+        self.AccBank[self.AccBankIteration] = data
+        self.AccBankIteration += 1
+
+    def setVelBank(self, data):
+        self.VelBank[self.AccBankIteration] = data
+        self.VelBankIteration += 1
+
+    def setPosBank(self, data):
+        self.PosBank[self.AccBankIteration] = data
+        self.PosBankIteration += 1
+
+
+    def getAccBank(self):
+        ouptut = self.AccBank
+        return ouptut
+
+    def getVelBank(self):
+        ouptut = self.VelBank
+        return ouptut
+
+    def getPosBank(self):
+        ouptut = self.PosBank
+        return ouptut

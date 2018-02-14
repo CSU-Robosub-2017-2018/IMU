@@ -54,3 +54,9 @@ class imu:
         allDataAvalable = (self.XAaccelData, self.YAaccelData, self.ZAaccelData, self.XRotGyroData,
                            self.YRotGyroData, self.ZRotGyroData, self.XMagnoData, self.YMagnoData, self.ZMagnoData, self.timeStamp)
         return allDataAvalable
+
+    def connect(self):
+        return None
+
+    def disconnect(self):
+        return None
