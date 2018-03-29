@@ -57,16 +57,29 @@ class imu_no_thrd_sparton(imu):
             v = list(map(int, self.ser.readline().decode("utf-8").split(',')))
             self.ser.flush()
 
-        self.XAaccelData = v[4] #206.2
-        self.YAaccelData = v[5]
-        self.ZAaccelData = v[6]
+        self.XAaccelData = v[4] / (2026)
+        self.YAaccelData = v[5] / (2026)
+        self.ZAaccelData = v[6] / (2026)
 
-        self.XRotGyroData = v[7]
-        self.YRotGyroData = v[8]
-        self.ZRotGyroData = v[9]
+        self.XRotGyroData = (v[7] / 110)*(3.14159265 /180)
+        self.YRotGyroData = (v[8] / 110)*(3.14159265 /180)
+        self.ZRotGyroData = (v[9] / 110)*(3.14159265 /180)
 
-        self.XMagnoData = v[1]
-        self.YMagnoData = v[2]
-        self.ZMagnoData = v[3]
+        self.XMagnoData = v[1] * 1 * 10 ** (-7)
+        self.YMagnoData = v[2] * 1 * 10 ** (-7)
+        self.ZMagnoData = v[3] * 1 * 10 ** (-7)
+
+
+        # self.XAaccelData = v[4] / 2026
+        # self.YAaccelData = v[5] / 2026
+        # self.ZAaccelData = v[6] / 2026
+        #
+        # self.XRotGyroData = (v[7] / 110)
+        # self.YRotGyroData = (v[8] / 110)
+        # self.ZRotGyroData = (v[9] / 110)
+        #
+        # self.XMagnoData = v[1] * 1 * 10 ** (-7)
+        # self.YMagnoData = v[2] * 1 * 10 ** (-7)
+        # self.ZMagnoData = v[3] * 1 * 10 ** (-7)
 
         self.timeStamp = v[0]

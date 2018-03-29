@@ -6,7 +6,7 @@ clc;                          	% clear the command terminal
 %% Set veralbles
 % Specify the folder where the files live and the name of the csv file desired.
 myFolder = 'C:\Users\bob\Desktop\IMU\imu_framwork_matlab\imu_framwork\tests\test_data';
-fullFileName = 'datatest.csv';
+fullFileName = 'data_circle_chris.csv';
 
 sampleFreuency = 1000;            % Sampling frequency                    
 T = 1/sampleFreuency;             % Sampling period       

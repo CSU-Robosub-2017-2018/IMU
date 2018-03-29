@@ -24,13 +24,13 @@ class imu9250(imu):
     link = 0x68
 
     def setData(self):
-        self.XAaccelData = data_to_int(self.bus, self.link, 59, 60)
-        self.YAaccelData = data_to_int(self.bus, self.link, 61, 62)
-        self.ZAaccelData = data_to_int(self.bus, self.link, 63, 64)
+        self.XAaccelData = data_to_int(self.bus, self.link, 59, 60) / (16384)
+        self.YAaccelData = data_to_int(self.bus, self.link, 61, 62) / (16384)
+        self.ZAaccelData = data_to_int(self.bus, self.link, 63, 64) / (16384)
 
-        self.XRotGyroData = data_to_int(self.bus, self.link, 67, 68)
-        self.YRotGyroData = data_to_int(self.bus, self.link, 69, 70)
-        self.ZRotGyroData = data_to_int(self.bus, self.link, 71, 72)
+        self.XRotGyroData = (data_to_int(self.bus, self.link, 67, 68) / 131)*(3.14159265 /180)
+        self.YRotGyroData = (data_to_int(self.bus, self.link, 69, 70) / 131)*(3.14159265 /180)
+        self.ZRotGyroData = (data_to_int(self.bus, self.link, 71, 72) / 131)*(3.14159265 /180)
 
 
 def twos_comp(val, bits):

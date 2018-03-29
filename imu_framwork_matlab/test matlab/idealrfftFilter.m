@@ -21,25 +21,25 @@ acc = [xIMUdata.CalInertialAndMagneticData.Accelerometer.X...
   
 % Plot
 
-figure();
-hold on;
-plot(gyr(:,1), 'r');
-plot(gyr(:,2), 'g');
-plot(gyr(:,3), 'b');
-xlabel('sample');
-ylabel('dps');
-title('Gyroscope');
-legend('X', 'Y', 'Z');
-
-figure();
-hold on;
-plot(acc(:,1), 'r');
-plot(acc(:,2), 'g');
-plot(acc(:,3), 'b');
-xlabel('sample');
-ylabel('g');
-title('Accelerometer');
-legend('X', 'Y', 'Z');
+% figure();
+% hold on;
+% plot(gyr(:,1), 'r');
+% plot(gyr(:,2), 'g');
+% plot(gyr(:,3), 'b');
+% xlabel('sample');
+% ylabel('dps');
+% title('Gyroscope');
+% legend('X', 'Y', 'Z');
+% 
+% figure();
+% hold on;
+% plot(acc(:,1), 'r');
+% plot(acc(:,2), 'g');
+% plot(acc(:,3), 'b');
+% xlabel('sample');
+% ylabel('g');
+% title('Accelerometer');
+% legend('X', 'Y', 'Z');
 
 %% Process data through AHRS algorithm (calcualte orientation)
 % See: http://www.x-io.co.uk/open-source-imu-and-ahrs-algorithms/
@@ -62,31 +62,31 @@ for i = 1:length(acc)
 end
 
 % Plot
-figure();
-hold on;
-plot(tcAcc(:,1), 'r');
-plot(tcAcc(:,2), 'g');
-plot(tcAcc(:,3), 'b');
-xlabel('sample');
-ylabel('g');
-title('''Tilt-compensated'' accelerometer');
-legend('X', 'Y', 'Z');
+% figure();
+% hold on;
+% plot(tcAcc(:,1), 'r');
+% plot(tcAcc(:,2), 'g');
+% plot(tcAcc(:,3), 'b');
+% xlabel('sample');
+% ylabel('g');
+% title('''Tilt-compensated'' accelerometer');
+% legend('X', 'Y', 'Z');
 
 %% Calculate linear acceleration in Earth frame (subtracting gravity)
 
 linAcc = tcAcc - [zeros(length(tcAcc), 1), zeros(length(tcAcc), 1), ones(length(tcAcc), 1)];
 linAcc = linAcc * 9.81;     % convert from 'g' to m/s/s
 
-% Plot
-figure();
-hold on;
-plot(linAcc(:,1), 'r');
-plot(linAcc(:,2), 'g');
-plot(linAcc(:,3), 'b');
-xlabel('sample');
-ylabel('g');
-title('Linear acceleration');
-legend('X', 'Y', 'Z');
+% % Plot
+% figure();
+% hold on;
+% plot(linAcc(:,1), 'r');
+% plot(linAcc(:,2), 'g');
+% plot(linAcc(:,3), 'b');
+% xlabel('sample');
+% ylabel('g');
+% title('Linear acceleration');
+% legend('X', 'Y', 'Z');
 
 %% Calculate linear velocity (integrate acceleartion)
 
@@ -96,16 +96,16 @@ for i = 2:length(linAcc)
     linVel(i,:) = linVel(i-1,:) + linAcc(i,:) * samplePeriod;
 end
 
-% Plot
-figure();
-hold on;
-plot(linVel(:,1), 'r');
-plot(linVel(:,2), 'g');
-plot(linVel(:,3), 'b');
-xlabel('sample');
-ylabel('g');
-title('Linear velocity');
-legend('X', 'Y', 'Z');
+% % Plot
+% figure();
+% hold on;
+% plot(linVel(:,1), 'r');
+% plot(linVel(:,2), 'g');
+% plot(linVel(:,3), 'b');
+% xlabel('sample');
+% ylabel('g');
+% title('Linear velocity');
+% legend('X', 'Y', 'Z');
 
 %% High-pass filter linear velocity to remove drift
 
@@ -114,16 +114,16 @@ filtCutOff = 0.1;
 [b, a] = butter(order, (2*filtCutOff)/(1/samplePeriod), 'high');
 linVelHP = filtfilt(b, a, linVel);
 
-% Plot
-figure();
-hold on;
-plot(linVelHP(:,1), 'r');
-plot(linVelHP(:,2), 'g');
-plot(linVelHP(:,3), 'b');
-xlabel('sample');
-ylabel('g');
-title('High-pass filtered linear velocity');
-legend('X', 'Y', 'Z');
+% % Plot
+% figure();
+% hold on;
+% plot(linVelHP(:,1), 'r');
+% plot(linVelHP(:,2), 'g');
+% plot(linVelHP(:,3), 'b');
+% xlabel('sample');
+% ylabel('g');
+% title('High-pass filtered linear velocity');
+% legend('X', 'Y', 'Z');
 
 %% Calculate linear position (integrate velocity)
 
@@ -133,16 +133,16 @@ for i = 2:length(linVelHP)
     linPos(i,:) = linPos(i-1,:) + linVelHP(i,:) * samplePeriod;
 end
 
-% Plot
-figure();
-hold on;
-plot(linPos(:,1), 'r');
-plot(linPos(:,2), 'g');
-plot(linPos(:,3), 'b');
-xlabel('sample');
-ylabel('g');
-title('Linear position');
-legend('X', 'Y', 'Z');
+% % Plot
+% figure();
+% hold on;
+% plot(linPos(:,1), 'r');
+% plot(linPos(:,2), 'g');
+% plot(linPos(:,3), 'b');
+% xlabel('sample');
+% ylabel('g');
+% title('Linear position');
+% legend('X', 'Y', 'Z');
 
 %% High-pass filter linear position to remove drift
 
@@ -151,16 +151,29 @@ filtCutOff = 0.1;
 [b, a] = butter(order, (2*filtCutOff)/(1/samplePeriod), 'high');
 linPosHP = filtfilt(b, a, linPos);
 
-% Plot
-figure();
-hold on;
-plot(linPosHP(:,1), 'r');
-plot(linPosHP(:,2), 'g');
-plot(linPosHP(:,3), 'b');
-xlabel('sample');
-ylabel('g');
-title('High-pass filtered linear position');
-legend('X', 'Y', 'Z');
+% % Plot
+% figure();
+% hold on;
+% plot(linPosHP(:,1), 'r');
+% plot(linPosHP(:,2), 'g');
+% plot(linPosHP(:,3), 'b');
+% xlabel('sample');
+% ylabel('g');
+% title('High-pass filtered linear position');
+% legend('X', 'Y', 'Z');
+
+%% write data to csv
+
+ for i = 1:length(linPosHP)
+    
+    posAndRotFromCsv(i,1:3) = linPosHP(i,:);
+    posAndRotFromCsv(i,4:6) = R(1,:,i);
+    posAndRotFromCsv(i,7:9) = R(2,:,i);
+    posAndRotFromCsv(i,10:12) = R(3,:,i);
+ end 
+
+
+csvwrite('posAndRotData.csv',posAndRotFromCsv)
 
 %% Play animation
 

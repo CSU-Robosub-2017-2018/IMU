@@ -27,8 +27,7 @@ information that is common between them all.
 
 
 class imu:
-
-    #Veriables
+    # Veriables
     def __init__(self):
         # does it have accelerometers, groscopes, magnometers
         self.hasAccel = False
@@ -49,10 +48,12 @@ class imu:
 
         self.timeStamp = 0
 
+
     # Returns all data available
     def getAllAvalableData(self):  # all data
         allDataAvalable = (self.XAaccelData, self.YAaccelData, self.ZAaccelData, self.XRotGyroData,
-                           self.YRotGyroData, self.ZRotGyroData, self.XMagnoData, self.YMagnoData, self.ZMagnoData, self.timeStamp)
+                           self.YRotGyroData, self.ZRotGyroData, self.XMagnoData, self.YMagnoData, self.ZMagnoData,
+                           self.timeStamp)
         return allDataAvalable
 
     def connect(self):
