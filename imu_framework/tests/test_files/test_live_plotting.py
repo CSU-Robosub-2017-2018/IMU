@@ -1,15 +1,14 @@
 from imu_framework.tests.context import imu_tools
 from imu_framework.tests.context import imu_base
-
-from imu_framework.tests.context import plottingTools
-
+from matplotlib import pyplot as plt
+from imu_framework.tests.context import RealtimePlot
 
 
 # from imu_framework.tests.context import imu_no_thrd_9250
 # from imu_framework.tests.context import imu_thrd_9250
 
-# from imu_framework.tests.context import imu_no_thrd_bmo
-# from imu_framework.tests.context import imu_thrd_bmo
+# from imu_framework.tests.context import imu_no_thrd_9250
+# from imu_framework.tests.context import imu_thrd_9250
 
 # from imu_framework.tests.context import imu_no_thrd_sparton
 # from imu_framework.tests.context import imu_thrd_sparton
@@ -38,32 +37,29 @@ if __name__ == '__main__':
     # fix me   take all and put into tools so multipal instantiations are can be achived
     ##########################################################################
     myTools = imu_tools(imu=myIMU_base)
-    display = plottingTools()
 
+    fig, axes = plt.subplots()
+    display = RealtimePlot(axes)
+
+    display.animate(fig, lambda frame_index: (i - 0, 0))
+    plt.show()
+    fig, axes = plt.subplots()
+    display = RealtimePlot(axes)
 
     i = 0
     print('start')
     while i <= 4999:
 
-        # rawAccel = myTools.get_raw_scale_data()
-        # print(i)
-        # print(rawAccel)
-        # myTools.dataForMatlabProcesing(rawAccel, i, 'LoggedData_CalInertialAndMag')
+        rawAccel = myTools.get_raw_scale_data()
 
-        tcAcceleration = myTools.get_arhs_tcAccel()
+        display.add(i - 0, rawAccel[2])
+        plt.pause(0.001)
 
-        display.add(i, tcAcceleration[0], tcAcceleration[1], tcAcceleration[2])
-
-        # print(tcAcceleration)
-        # R = myTools.get_arhs_rot_matrix()
-        # print(R)
-        # myTools.procesedAccRot2Csv(tcAcceleration, R, i, 'dataFromPython', 'C:/Users/bob/Desktop/IMU/imu_framwork_matlab/test matlab/')
-        #
-        # zVector = myTools.get_arhs_z_vector()
-        # print(zVector)
         i = i + 1
 
         ######## disconnect all IMUs #############################################
 
     # myIMU_no_thrd_sparton.disconnect()
     print(i)
+
+

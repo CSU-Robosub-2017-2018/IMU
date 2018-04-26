@@ -1,8 +1,19 @@
+''' imu_no_thrd_bno55.py - Use this class to obtain data from the bn055 imu. The data is obtained without using
+threading. This class is not currently functioning on the raspbery pi as it will need to be
+reconfigure to connect properly to the bno55 imu. The method for connecting the imu may change
+but the file should remain essentially the same.
+'''
+
 from imu_framework.imu_framework.imus.imu import imu
 import smbus
 
 class imu_no_thrd_bno55(imu):
 
+    ##
+    # @brief Obtains data from the bno55 imu without threading
+    # @param filePath The absolute file path to the csv file
+    # @param bus The bus number associated to the imu
+    # @param link The link number associated to the imu
     def __init__(self):
         imu.__init__(self)
 
@@ -39,11 +50,8 @@ class imu_no_thrd_bno55(imu):
         # Temperature data register
         self.BNO055_TEMP_ADDR = 0X34
 
-
-    #connect to above def
-    bus = smbus.SMBus(1)  # i2c port 1
-    link = 0x68
-
+    ##
+    # @brief This function updates the list of xyz acceleration, gyroscope, and magnetometer global variables
     def setData(self):
         self.XAaccelData = data_to_int(self.bus, self.link, self.BNO055_ACCEL_DATA_X_MSB_ADDR, self.BNO055_ACCEL_DATA_X_LSB_ADDR)
         self.YAaccelData = data_to_int(self.bus, self.link, self.BNO055_ACCEL_DATA_Y_MSB_ADDR, self.BNO055_ACCEL_DATA_Y_LSB_ADDR)
@@ -53,27 +61,27 @@ class imu_no_thrd_bno55(imu):
         self.YRotGyroData = data_to_int(self.bus, self.link, self.BNO055_GYRO_DATA_Y_MSB_ADDR, self.BNO055_GYRO_DATA_Y_LSB_ADDR)
         self.ZRotGyroData = data_to_int(self.bus, self.link, self.BNO055_GYRO_DATA_Z_MSB_ADDR, self.BNO055_GYRO_DATA_Z_LSB_ADDR)
 
-
+##
+# @brief Converts twos complement binary number into a decimal number
+# @param val Is the data obtained from the imu represented by a twos complement binary number
+# @param bits The total number of bits used to describe the number
+# @return val The decimal representation of the input number (val)
 def twos_comp(val, bits):
     if (val & (1 << (bits - 1))) != 0:
         val = val - (1 << bits)
     return val
 
-# Converts two bytes into a binary String format
-def tobinary(high, low):
-    return '{0:08b}'.format(high) + '{0:08b}'.format(low)
 
-# requires 16-bit String (1's and 0's)
-def binary_twos(word):
-    wordint = int(word, 2)
-    if word[0] == '0':
-        return wordint
-    else:
-        return twos_comp(wordint, 16)
-
-# Given register and bus constraints, outputs the correct +/- int corresponding to high and low register values
+##
+# @brief This function connects the computer to the imu and gathers the information located in the desired registers
+# @param bus The bus on which to connect to the imu
+# @param link The hex value for the link to the imu (found using terminal and i2c tools)
+# @param highreg The register number for the high value byte
+# @param lowreg The register number for the low value byte
+# @return The decimal value of the twos complement of the combined high and low bytes
 def data_to_int(bus, link, highreg, lowreg):
     highdata = bus.read_byte_data(link, highreg)
     lowdata = bus.read_byte_data(link, lowreg)
     dblbyte = '{0:08b}'.format(highdata) + '{0:08b}'.format(lowdata)
     return twos_comp(int(dblbyte, 2), 16)
+# Given register and bus constraints, outputs the correct +/- int corresponding to high and low register values

@@ -1,21 +1,20 @@
-import numpy as np
-
-
-
-class quaternion_tools():
-    # AXISANGLE2QUATERN Converts an axis-angle orientation to a quaternion
-    #
-    #   q = axisAngle2quatern(axis, angle)
-    #
-    #   Converts and axis-angle orientation to a quaternion where a 3D rotation
-    #   is described by an angular rotation around axis defined by a vector.
-    #
+'''
     #   For more information see:
     #   http://www.x-io.co.uk/node/8#quaternions
     #
     #	Date          Author          Notes
     #	27/09/2011    SOH Madgwick    Initial release
     #	25/11/2017	  Billy Phillips  MATLAB to Python
+
+    quatern_tools.py - Use this class to convert interchangeably between quaternions, rotation matrix,
+    and euler angles.
+'''
+import numpy as np
+
+
+
+class quaternion_tools():
+
 
     def axisAngle2quatern(self, axis, angle):
         axis0 = axis[0]
@@ -44,6 +43,12 @@ class quaternion_tools():
     #	27/09/2011    SOH Madgwick    Initial release
     #	25/11/2017	  Billy Phillips  MATLAB to Python
 
+    ##
+    # @brief Converts and axis-angle orientation to a rotation matrix where a 3D
+    # rotation is described by an angular rotation around axis defined by a vector.
+    # @param axis The axis described by a list of size three
+    # @param angel The angle of rotation
+    # @return R The resulting rotation matrix of size 3 by 3
     def axisAngle2rotMat(self, axis, angle):
         kx = axis[0]
         ky = axis[1]
@@ -85,6 +90,13 @@ class quaternion_tools():
     #	27/09/2011    SOH Madgwick    Initial release
     #	25/11/2017	  Billy Phillips  MATLAB to Python
 
+    ##
+    # @brief Converts ZYX Euler angle orientation to a rotation matrix where phi is
+    # a rotation around X, theta around Y and psi around Z.
+    # @param phi Phi rotation around X
+    # @param theta Theta rotation around Y
+    # @param psi Psi rotation around Z
+    # @return R The resulting rotation matrix of size 3 by 3
     def euler2rotMat(self, phi, theta, psi):
         R0 = [0] * 3
         R1 = [0] * 3
@@ -120,6 +132,11 @@ class quaternion_tools():
     #	27/09/2011    SOH Madgwick    Initial release
     #	25/11/2017	  Billy Phillips  MATLAB to Python
 
+    ##
+    # @brief Converts a quaternion orientation to ZYX Euler angles where phi is a
+    # rotation around X, theta around Y and psi around Z.
+    # @param q A Quaternion described by a list of size 4
+    # @return [phi, theta, psi] The resulting ZYX Euler angles.
     def quatern2euler(self, q):
         q0 = q[0]
         q1 = q[1]
@@ -153,6 +170,10 @@ class quaternion_tools():
     #	27/09/2011    SOH Madgwick    Initial release
     #	25/11/2017	  Billy Phillips  MATLAB to Python
 
+    ##
+    # @brief Converts a quaternion orientation to a rotation matrix.
+    # @param q A Quaternion described by a list of size 4
+    # @return R The resulting rotation matrix of size 3 by 3
     def quatern2rotMat(self, q):
         q0 = q[0]
         q1 = q[1]
@@ -191,6 +212,10 @@ class quaternion_tools():
     #	27/09/2011    SOH Madgwick    Initial release
     #	25/11/2017	  Billy Phillips  MATLAB to Python
 
+    ##
+    # @brief Converts a quaternion to its conjugate.
+    # @param q A Quaternion described by a list of size 4
+    # @return qConj The resulting quaternion conjugate
     def quaternConj(self, q):
         q0 = q[0]
         q1 = q[1]
@@ -213,6 +238,11 @@ class quaternion_tools():
     #	27/09/2011    SOH Madgwick    Initial release
     #	25/11/2017	  Billy Phillips  MATLAB to Python
 
+    ##
+    # @brief Calculates the quaternion product of quaternion a and b.
+    # @param a A Quaternion described by a list of size 4
+    # @param b A Quaternion described by a list of size 4
+    # @return ab The resulting quaternion product
     def quaternProd(self, a, b):
         a0 = a[0]
         a1 = a[1]
@@ -247,6 +277,11 @@ class quaternion_tools():
     #   27/09/2011    SOH Madgwick    Initial release
     #	25/11/2017	  Billy Phillips  MATLAB to Python
 
+    ##
+    # @brief Converts a rotation matrix orientation to ZYX Euler angles where phi is
+    # a rotation around X, theta around Y and psi around Z.
+    # @param R A rotation matrix of size 3 by 3
+    # @return euler A list of size 3 of the resulting ZYX Euler angles.
     def rotMat2euler(self, R):
         phi = np.arctan2(R[2][1], R[2][2])
         theta = -np.arctan(R[2][0] / np.sqrt(1 - R[2][0] ** 2))
@@ -269,6 +304,10 @@ class quaternion_tools():
     #	27/09/2011    SOH Madgwick    Initial release
     #	25/11/2017	  Billy Phillips  MATLAB to Python
 
+    ##
+    # @brief Converts a rotation matrix orientation to a quaternion.
+    # @param R A rotation matrix of size 3 by 3
+    # @return q A list of size 4 of the resulting quaternion.
     def rotMat2quatern(self, R):
         K = [[0] * 4] * 4
 
@@ -309,6 +348,10 @@ class quaternion_tools():
 
         return q
 
+    ##
+    # @brief Takes the transpose of a 3 by 3 rotation matrix.
+    # @param R A rotation matrix of size 3 by 3
+    # @return R A list of size 3 by 3 of the resulting transposed rotation matrix.
     def matlabTranspos(self, R):
         Rout = np.array([[R[0][0], R[1][0], R[2][0]],
                          [R[0][1], R[1][1], R[2][1]],

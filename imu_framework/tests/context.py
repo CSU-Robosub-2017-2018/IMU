@@ -22,3 +22,6 @@ from imu_framework.imu_framework.imus.imu_no_thrd_sparton import imu_no_thrd_spa
 
 
 # from imu_framework.imu_framework.imu_memory import imu_data # fix me do i need this
+
+
+from imu_framework.imu_framework.plotting_tools import plottingTools

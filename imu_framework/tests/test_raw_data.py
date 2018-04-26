@@ -1,5 +1,7 @@
 from imu_framework.tests.context import imu_tools
 from imu_framework.tests.context import imu_base
+from matplotlib import pyplot as plt
+from imu_framework.tests.context import RealtimePlot
 
 
 # from imu_framework.tests.context import imu_no_thrd_9250
@@ -36,14 +38,18 @@ if __name__ == '__main__':
     ##########################################################################
     myTools = imu_tools(imu=myIMU_base)
 
+    fig, axes = plt.subplots()
+    display = RealtimePlot(axes)
+
     i = 0
     print('start')
     while i <= 4999:
 
         rawAccel = myTools.get_raw_scale_data()
+
         # print(i)
-        # print(rawAccel)
-        myTools.dataForMatlabProcesing(rawAccel, i, 'LoggedData_CalInertialAndMag')
+        print(rawAccel)
+        # myTools.dataForMatlabProcesing(rawAccel, i, 'LoggedData_CalInertialAndMag')
 
         # tcAcceleration = myTools.get_arhs_tcAccel()
         # print(tcAcceleration)
@@ -56,3 +62,13 @@ if __name__ == '__main__':
 
     # myIMU_no_thrd_sparton.disconnect()
     print(i)
+
+
+    display.animate(fig, lambda frame_index: (time.time() - start, random.random() * 100))
+    plt.show()
+
+    fig, axes = plt.subplots()
+    display = RealtimePlot(axes)
+    while True:
+        display.add(time.time() - start, 100)
+        plt.pause(0.001)

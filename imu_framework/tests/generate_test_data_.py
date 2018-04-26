@@ -1,5 +1,5 @@
 from imu_framework.tests.context import imu_tools
-from imu_framework.tests.context import imu_base
+# from imu_framework.tests.context import imu_base
 
 
 # from imu_framework.tests.context import imu_no_thrd_9250
@@ -20,9 +20,6 @@ if __name__ == '__main__':
     myIMU_no_thrd_sparton = imu_no_thrd_sparton()
     # myIMU_thrd_sparton = imu_thrd_sparton()
 
-    # myIMU_base = imu_base()
-
-
     ######## connect all IMUs #############################################
     # myIMU_no_thrd_9250.connect()
     # myIMU_thrd_9250.connect()
@@ -30,27 +27,23 @@ if __name__ == '__main__':
     myIMU_no_thrd_sparton.connect()
     # myIMU_thrd_sparton.connect()
 
-    # myIMU_base.connect(fileName='imu_base_data_upDown_z.csv')
+    # myIMU_base.connect()
 
     # fix me   take all and put into tools so multipal instantiations are can be achived
     ##########################################################################
-    myTools = imu_tools( fifoMemSize=1000, imu=myIMU_no_thrd_sparton)
+    myTools = imu_tools(imu=myIMU_no_thrd_sparton)
 
     i = 0
     print('start')
-    while i <= 10000:
+    while i <= 3000:
 
-        R = myTools.get_arhs_rot_matrix()
-        pos = myTools.get_arhs_pos()
-        # print(i)
-        print(pos)
-
-        # myTools.procesedPosRot2Csv(pos, R, i, 'dataFromPython', 'C:/Users/bob/Desktop/IMU/imu_framwork_matlab/test matlab/')
+        print(i)
+        rawAccel = myTools.get_raw_scale_data()
+        myTools.rawData2Csv(rawAccel, i, 'sparton_imu_test_rot_z', 'C:/Users/bob/Desktop/Oscillatory-Motion-Tracking-With-x-IMU/')
 
         i = i + 1
 
-    # print(myTools.get_arhs_vel_bank())
-    print('stop')
-    #### disconnect all IMUs #############################################
-    myIMU_base.disconnect()
-    myIMU_no_thrd_sparton.disconnect()
+        ######## disconnect all IMUs #############################################
+
+    # myIMU_no_thrd_sparton.disconnect()
+    print(i)

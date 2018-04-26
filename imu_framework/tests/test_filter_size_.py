@@ -1,6 +1,7 @@
 from imu_framework.tests.context import imu_tools
 from imu_framework.tests.context import imu_base
 import pylab as plt
+import numpy as np
 
 
 # from imu_framework.tests.context import imu_no_thrd_9250
@@ -31,12 +32,12 @@ if __name__ == '__main__':
     # myIMU_no_thrd_sparton.connect()
     # myIMU_thrd_sparton.connect()
 
-    myIMU_base.connect()
+    myIMU_base.connect(fileName='imu_base_data_upDown_z.csv')
 
     # fix me   take all and put into tools so multipal instantiations are can be achived
     ##########################################################################
     # myTools = imu_tools(imu=myIMU_no_thrd_sparton)
-    myTools = imu_tools(fifoMemSize=5000, imu=myIMU_base)
+    myTools = imu_tools(fifoMemSize=10000, imu=myIMU_base)
 
     i = 0
     print('start')
@@ -47,7 +48,7 @@ if __name__ == '__main__':
         # print(rawAccel)
         # myTools.dataForMatlabProcesing(rawAccel, i, 'LoggedData_CalInertialAndMag')
 
-        # tcAcceleration = myTools.get_arhs_tcAccel()
+        tcAcceleration = myTools.get_arhs_tcAccel()
         # print(tcAcceleration)
         # R = myTools.get_arhs_rot_matrix()
         # print(R)
@@ -62,42 +63,31 @@ if __name__ == '__main__':
     # myIMU_no_thrd_sparton.disconnect()
     print(i)
 
-    time = np.linspace(0, 10, 2000)
-    signal = np.cos(3 * np.pi * time) + np.cos(10 * np.pi * time)
-    signalIN = np.array([signal, 2 * signal, 3 * signal]).transpose()
+    signalIN = myTools.getAccBank()
+    # print(signalIN)
 
-    myTools = imu_tools(signal.size, deltaT=time[1] - time[0])
-    cut_signal_tools_10 = myTools.bandPassFilter(signalIN, 8, 11)
-    cut_signal_tools_3 = myTools.bandPassFilter(signalIN, 1, 5)
+    time = np.linspace(0, 1, 5000)
 
-    plt.subplot(331)
+    cut_signal_tools_10 = myTools.bandPassFilter(signalIN, 0.2, 8)
+
+    plt.subplot(231)
     plt.plot(time, signalIN[:, 0])
     plt.xlim(0, 1)
-    plt.subplot(332)
+    plt.subplot(232)
     plt.plot(time, signalIN[:, 1])
     plt.xlim(0, 1)
-    plt.subplot(333)
+    plt.subplot(233)
     plt.plot(time, signalIN[:, 2])
     plt.xlim(0, 1)
 
-    plt.subplot(334)
+    plt.subplot(234)
     plt.plot(time, cut_signal_tools_10[:, 0])
     plt.xlim(0, 1)
-    plt.subplot(335)
+    plt.subplot(235)
     plt.plot(time, cut_signal_tools_10[:, 1])
     plt.xlim(0, 1)
-    plt.subplot(336)
+    plt.subplot(236)
     plt.plot(time, cut_signal_tools_10[:, 2])
-    plt.xlim(0, 1)
-
-    plt.subplot(337)
-    plt.plot(time, cut_signal_tools_3[:, 0])
-    plt.xlim(0, 1)
-    plt.subplot(338)
-    plt.plot(time, cut_signal_tools_3[:, 1])
-    plt.xlim(0, 1)
-    plt.subplot(339)
-    plt.plot(time, cut_signal_tools_3[:, 2])
     plt.xlim(0, 1)
 
     plt.show()
