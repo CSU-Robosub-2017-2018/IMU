@@ -1,0 +1,3 @@
+This text file will contain all of the requirements for short,
+mid, and long term requirements and goals for the 2017/18 
+RoboSub Sensors Team
