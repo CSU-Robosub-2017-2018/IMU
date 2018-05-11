@@ -1,0 +1,54 @@
+Folder PATH listing for volume Windows
+Volume serial number is E6E4-BE1B
+C:.
+|   doxygen_and_html.sh
+|   output.txt
+|   README.md
+|   requirements.txt
+|   
+\---imu_framework
+    |   __init__.py
+    |   
+    +---.idea
+    |   |   imu_framework.iml
+    |   |   misc.xml
+    |   |   modules.xml
+    |   |   workspace.xml
+    |   |   
+    |   \---inspectionProfiles
+    |           profiles_settings.xml
+    |           
+    +---imu_framework
+    |   |   imu_memory.py
+    |   |   imu_tools.py
+    |   |   MAYHONYAHRS.py
+    |   |   plotting_tools.py
+    |   |   quatern_tools.py
+    |   |   __init__.py
+    |   |   
+    |   \---imus
+    |           imu.py
+    |           imu_base.py
+    |           imu_no_thrd_9250.py
+    |           imu_no_thrd_bno55.py
+    |           imu_no_thrd_sparton.py
+    |           imu_thrd_9250.py
+    |           __init__.py
+    |           
+    \---tests
+        |   context.py
+        |   generate_post_processing_data_.py
+        |   generate_test_data_.py
+        |   test_arhs_.py
+        |   test_connectivity.py
+        |   test_dead_reconing.py
+        |   test_filters.py
+        |   test_filter_size_.py
+        |   test_live_ploting.py
+        |   test_quaternion_library.py
+        |   test_raw_data.py
+        |   __init__.py
+        |   
+        \---test_files
+                __init__.py
+                
