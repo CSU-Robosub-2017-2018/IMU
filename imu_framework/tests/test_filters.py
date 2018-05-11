@@ -1,3 +1,7 @@
+''' test_filters.py - Use this program test the fft filters.
+
+'''
+
 import numpy as np
 from imu_framework.tests.context import imu_tools
 import pylab as plt

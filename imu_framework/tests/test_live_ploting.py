@@ -1,3 +1,7 @@
+''' test_live_plotting.py - Use this program to connect, gather, and plot live data from any imu on file.
+
+'''
+
 from imu_framework.tests.context import imu_tools
 from imu_framework.tests.context import imu_base
 from imu_framework.tests.context import plottingTools

@@ -1,3 +1,6 @@
+''' test_arhs.py - Use this test to test arhs on live data or from a file using imu_base.py
+'''
+
 from imu_framework.tests.context import imu_tools
 from imu_framework.tests.context import imu_base
 
@@ -45,11 +48,6 @@ if __name__ == '__main__':
     print('start')
     while i <= 4999:
 
-        # rawAccel = myTools.get_raw_scale_data()
-        # print(i)
-        # print(rawAccel)
-        # myTools.dataForMatlabProcesing(rawAccel, i, 'LoggedData_CalInertialAndMag')
-
         tcAcceleration = myTools.get_arhs_tcAccel()
 
         display.add(i, tcAcceleration[0], tcAcceleration[1], tcAcceleration[2])
@@ -58,9 +56,7 @@ if __name__ == '__main__':
         # R = myTools.get_arhs_rot_matrix()
         # print(R)
         # myTools.procesedAccRot2Csv(tcAcceleration, R, i, 'dataFromPython', 'C:/Users/bob/Desktop/IMU/imu_framwork_matlab/test matlab/')
-        #
-        # zVector = myTools.get_arhs_z_vector()
-        # print(zVector)
+
         i = i + 1
 
         ######## disconnect all IMUs #############################################

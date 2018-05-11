@@ -1,3 +1,7 @@
+''' test_quaternion_library.py - Use this program to check if the quaternion library is correct.
+
+'''
+
 import numpy as np
 from imu_framework.tests.context import quaternion_tools
 

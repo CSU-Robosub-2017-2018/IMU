@@ -1,3 +1,7 @@
+''' test_filter_size.py - Use this program to tune in fft filters.
+
+'''
+
 from imu_framework.tests.context import imu_tools
 from imu_framework.tests.context import imu_base
 import pylab as plt

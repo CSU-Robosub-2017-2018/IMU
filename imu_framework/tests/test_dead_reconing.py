@@ -1,3 +1,7 @@
+''' test_raw_data.py - Use this program to test the live dead reckoning algorithm.
+
+'''
+
 from imu_framework.tests.context import imu_tools
 from imu_framework.tests.context import imu_base
 

@@ -1,3 +1,7 @@
+''' test_raw_data.py - Use this program to connect to any imu on file and output raw data.
+
+'''
+
 from imu_framework.tests.context import imu_tools
 from imu_framework.tests.context import imu_base
 from matplotlib import pyplot as plt
