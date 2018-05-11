@@ -1,3 +1,6 @@
+''' generate_test_data.py - Use this program to save raw data that can be used for the base_imu.py.
+'''
+
 from imu_framework.tests.context import imu_tools
 # from imu_framework.tests.context import imu_base
 

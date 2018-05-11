@@ -1,3 +1,6 @@
+'''	generate_post_processing_data_.py - Use this program to save processed imu data frm any imu on file. 
+'''
+
 from imu_framework.tests.context import imu_tools
 from imu_framework.tests.context import imu_base
 import numpy as np
