@@ -1,3 +1,14 @@
-This text file will contain all of the requirements for short,
-mid, and long term requirements and goals for the 2017/18 
-RoboSub Sensors Team
+RoboSub Sensors Team 2018
+
+The inertial measurement units (IMU’s) have had a lot of focus this semester. As of now they are only being used for orientation but, have framework that will allow them to be used for dead reckoning. The filtering scheme is the last hold up. Once appropriate scheme for filtering the data is implemented, dead reckoning from the IMU can be achieved.
+This program is currently designed to be used on a raspberry pi, windows, and on ubuntu 16.04. most off the requirements below are used for connection and cannot be downloaded onto every system. To check if the framework has downloaded properly, simply run test_quaternion_library.py which runs on every system. 
+
+Current requirements 
+-	Linux 
+-	Windows with PyCharm
+-	numpy
+-	Time
+-	smbus
+-	csv
+-	matplotlib
+-	serial
